@@ -11,10 +11,10 @@ import (
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
-func convert(b big.Int) *big.Float {
+func convert(b big.Int, e int) *big.Float {
 	fbalance := new(big.Float)
 	fbalance.SetString(b.String())
-	return new(big.Float).Quo(fbalance, big.NewFloat(math.Pow10(18)))
+	return new(big.Float).Quo(fbalance, big.NewFloat(math.Pow10(e)))
 }
 
 func main() {
@@ -40,9 +40,9 @@ func main() {
 	}
 	for _, tx := range block.Transactions() {
 		fmt.Printf("transaction: %s\n", tx.Hash().Hex())
-		fmt.Printf("transfered: %f ETH\n", convert(*tx.Value()))
+		fmt.Printf("transfered: %f ETH\n", convert(*tx.Value(), 18)) // wei / 10^18
 		fmt.Printf("Gas used: %v\n", tx.Gas())
-		fmt.Printf("Gas price: %v\n", tx.GasPrice().Uint64())
+		fmt.Printf("Gas price: %v gwei\n", convert(*tx.GasPrice(), 9)) // gwei -> value / 10^9
 		fmt.Printf("Nonce: %v\n", tx.Nonce())
 		fmt.Printf("Data: %v\n", tx.Data())
 		fmt.Printf("To: %s\n", tx.To().Hex())
