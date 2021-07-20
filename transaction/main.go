@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/big"
 
+	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
 
@@ -38,5 +39,15 @@ func main() {
 		fmt.Println(tx.Nonce())
 		fmt.Println(tx.Data())
 		fmt.Println(tx.To().Hex())
+
+		chainID, err := client.NetworkID(context.Background())
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if msg, err := tx.AsMessage(types.NewEIP155Signer(chainID), block.BaseFee()); err != nil {
+			fmt.Println(msg.From().Hex())
+		}
 	}
 }
