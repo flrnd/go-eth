@@ -31,9 +31,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(block.Number().Uint64())
-	fmt.Println(block.Time())
-	fmt.Println(block.Difficulty().Uint64())
-	fmt.Println(block.Hash().Hex())
-	fmt.Println(len(block.Transactions()))
+	fmt.Println("Block")
+	fmt.Printf("Number: %d\n", block.Number().Uint64())
+	fmt.Printf("Time: %v\n", block.Time())
+	fmt.Printf("Difficulty: %v\n", block.Difficulty().Uint64())
+	fmt.Printf("Hash: %v\n", block.Hash().Hex())
+	fmt.Printf("Total transactions: %v\n", len(block.Transactions()))
 }
