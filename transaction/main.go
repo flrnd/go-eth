@@ -4,11 +4,18 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"math"
 	"math/big"
 
 	"github.com/ethereum/go-ethereum/core/types"
 	"github.com/ethereum/go-ethereum/ethclient"
 )
+
+func convert(b big.Int) *big.Float {
+	fbalance := new(big.Float)
+	fbalance.SetString(b.String())
+	return new(big.Float).Quo(fbalance, big.NewFloat(math.Pow10(18)))
+}
 
 func main() {
 	client, err := ethclient.Dial("http://localhost:8545")
@@ -32,13 +39,13 @@ func main() {
 		log.Fatal(err)
 	}
 	for _, tx := range block.Transactions() {
-		fmt.Println(tx.Hash().Hex())
-		fmt.Println(tx.Value().String())
-		fmt.Println(tx.Gas())
-		fmt.Println(tx.GasPrice().Uint64())
-		fmt.Println(tx.Nonce())
-		fmt.Println(tx.Data())
-		fmt.Println(tx.To().Hex())
+		fmt.Printf("transaction: %s\n", tx.Hash().Hex())
+		fmt.Printf("transfered: %f ETH\n", convert(*tx.Value()))
+		fmt.Printf("Gas used: %v\n", tx.Gas())
+		fmt.Printf("Gas price: %v\n", tx.GasPrice().Uint64())
+		fmt.Printf("Nonce: %v\n", tx.Nonce())
+		fmt.Printf("Data: %v\n", tx.Data())
+		fmt.Printf("To: %s\n", tx.To().Hex())
 
 		chainID, err := client.NetworkID(context.Background())
 
