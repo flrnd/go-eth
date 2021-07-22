@@ -23,6 +23,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Println("Connected")
 	account := common.HexToAddress("0xaB798435FC3654010D133C10eee3d6e6D77d969C")
 	blockNumber, _ := client.BlockNumber(context.Background())
