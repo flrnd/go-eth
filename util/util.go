@@ -83,3 +83,9 @@ func ToWei(iamount interface{}, decimals int) *big.Int {
 
 	return wei
 }
+
+// CalcGasCost calulate gas cost given gas limit (units) and gas price (wei)
+func CalcGasCost(gasLimit uint64, gasPrice *big.Int) *big.Int {
+	gasLimitBig := big.NewInt(int64(gasLimit))
+	return gasLimitBig.Mul(gasLimitBig, gasPrice)
+}
