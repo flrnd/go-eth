@@ -14,7 +14,7 @@ import (
 )
 
 func main() {
-	client, err := ethclient.Dial("https://rinkeby.infura.io")
+	client, err := ethclient.Dial("http://localhost:8545")
 	_ = client
 	if err != nil {
 		log.Fatal(err)
