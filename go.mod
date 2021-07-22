@@ -12,6 +12,7 @@ require (
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/prometheus/tsdb v0.10.0 // indirect
 	github.com/shirou/gopsutil v3.21.6+incompatible // indirect
+	github.com/shopspring/decimal v1.2.0
 	github.com/tklauser/go-sysconf v0.3.7 // indirect
 	golang.org/x/crypto v0.0.0-20210711020723-a769d52b0f97 // indirect
 )
