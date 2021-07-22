@@ -36,7 +36,8 @@ func main() {
 		fmt.Printf("transaction: %s\n", tx.Hash().Hex())
 		fmt.Printf("transfered: %v ETH\n", util.ToDecimal(tx.Value(), 18)) // wei / 10^18
 		fmt.Printf("Gas used: %v\n", tx.Gas())
-		fmt.Printf("Gas cost: %v gwei\n", util.CalcGasCost(tx.Gas(), tx.GasPrice()))
+		fmt.Printf("Gas price: %v gwei\n", util.ToDecimal(tx.GasPrice(), 9))
+		fmt.Printf("Gas cost: %v ETH\n", util.ToDecimal(util.CalcGasCost(tx.Gas(), tx.GasPrice()), 18))
 		fmt.Printf("Nonce: %v\n", tx.Nonce())
 		fmt.Printf("Data: %v\n", tx.Data())
 		fmt.Printf("To: %s\n", tx.To().Hex())
